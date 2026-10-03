@@ -23,8 +23,10 @@ type airtableResp struct {
 }
 
 func LoadAirtable(config Config) ([]Project, error) {
+	formula := url.QueryEscape("AND({Automation - First Submitted At} = '', {Review Status} = 'Approved')")
 	url, err := url.JoinPath("https://api.airtable.com/v0", config.AirtableBase, "/", config.AirtableTable)
 	if err != nil { return nil, err }
+	url += "?filterByFormula=" + formula
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil { return nil, err }
 	req.Header.Add("Authorization", "Bearer " + config.AirtablePAT)

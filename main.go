@@ -82,4 +82,11 @@ func main() {
   encoder.Encode(config)
 
   fmt.Println("\nloading projects from Airtable...")
+  projects, err := LoadAirtable(config)
+  if err != nil { panic (err) }
+  fmt.Println(len(projects))
+  for index := range projects {
+    var project = projects[index]
+    fmt.Println(project)
+  }
 }
