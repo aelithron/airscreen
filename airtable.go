@@ -22,12 +22,12 @@ type airtableResp struct {
 	} `json:"records"`
 }
 
-func LoadAirtable() ([]Project, error) {
-	url, err := url.JoinPath("https://api.airtable.com/v0", "(base)", "/", "(table)")
+func LoadAirtable(config Config) ([]Project, error) {
+	url, err := url.JoinPath("https://api.airtable.com/v0", config.AirtableBase, "/", config.AirtableTable)
 	if err != nil { return nil, err }
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil { return nil, err }
-	req.Header.Add("Authorization", "Bearer " + "(key)")
+	req.Header.Add("Authorization", "Bearer " + config.AirtablePAT)
 	client := http.Client{ Timeout: 10 * time.Second }
 	resp, err := client.Do(req)
 	if err != nil { panic (err) }
