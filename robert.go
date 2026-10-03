@@ -1,4 +1,4 @@
-package airscreen
+package main
 
 import (
 	"io"
