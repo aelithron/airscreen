@@ -35,7 +35,7 @@ func main() {
   configFile, err := os.ReadFile(path)
   if err != nil {
     if errors.Is(err, os.ErrNotExist) {
-      fmt.Println("writing empty config file to " + `"` + path + `"` + "...")
+      fmt.Printf(`writing empty config file to "%s"...` + "\n", path)
       err := os.MkdirAll(filepath.Dir(path), 0700)
       file, err := os.Create(path)
       if (err != nil) { panic (err) }
@@ -84,9 +84,8 @@ func main() {
   fmt.Println("\nloading projects from Airtable...")
   projects, err := LoadAirtable(config)
   if err != nil { panic (err) }
-  fmt.Println(len(projects))
+  fmt.Printf("found %d projects!\n", len(projects))
   for index := range projects {
-    var project = projects[index]
-    fmt.Println(project)
+    CheckProject(projects[index], index, len(projects))
   }
 }
