@@ -22,20 +22,20 @@ type airtableResp struct {
 	} `json:"records"`
 }
 
-func LoadAirtable(config Config) ([]Project, error) {
+func LoadAirtable(config Config) ([]Project) {
 	formula := url.QueryEscape("AND({Automation - First Submitted At} = '', {Review Status} = 'Approved')")
 	url, err := url.JoinPath("https://api.airtable.com/v0", config.AirtableBase, "/", config.AirtableTable)
-	if err != nil { return nil, err }
+	if err != nil { panic (err) }
 	url += "?filterByFormula=" + formula
 	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil { return nil, err }
+	if err != nil { panic (err) }
 	req.Header.Add("Authorization", "Bearer " + config.AirtablePAT)
 	client := http.Client{ Timeout: 10 * time.Second }
 	resp, err := client.Do(req)
 	if err != nil { panic (err) }
 	defer resp.Body.Close()
 	resBody, err := io.ReadAll(resp.Body)
-	if err != nil { return nil, err }
+	if err != nil { panic (err) }
 	var body airtableResp
 	if err := json.Unmarshal(resBody, &body); err != nil { panic (err) }
 	var projects []Project
@@ -51,5 +51,5 @@ func LoadAirtable(config Config) ([]Project, error) {
 		}
 		projects = append(projects, *newProject)
 	}
-	return projects, nil
+	return projects
 }
