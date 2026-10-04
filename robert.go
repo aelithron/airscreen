@@ -15,8 +15,8 @@ type robertReq struct {
 	Kind string `json:"kind"`
 	CodeUrl string `json:"codeUrl"`
 	DemoUrl string `json:"playableUrl"`
-	HackatimeProjs []string `json:"hackatimeProjs"`
-	Submitter submitter
+	HackatimeProjs []string `json:"hackatimeProjects"`
+	Submitter submitter `json:"submitter"`
 	ExternalID string `json:"externalId"`
 }
 type submitter struct {
@@ -53,6 +53,5 @@ func SendProject(project Project, config Config) {
 		fmt.Printf("[error] this project was already submitted to robert! id: %s\n", body.ID)
 		return
 	}
-	fmt.Println(string(resBody))
 	fmt.Printf("submitted to robert! id: %s\n", body.ID)
 }
