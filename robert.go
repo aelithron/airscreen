@@ -14,7 +14,7 @@ type robertReq struct {
 	Name string `json:"name"`
 	Kind string `json:"kind"`
 	CodeUrl string `json:"codeUrl"`
-	DemoUrl string `json:"playableUrl"`
+	DemoUrl string `json:"demoUrl"`
 	HackatimeProjs []string `json:"hackatimeProjects"`
 	Submitter submitter `json:"submitter"`
 	ExternalID string `json:"externalId"`
