@@ -12,11 +12,12 @@ import (
 type airtableResp struct {
   Records []struct {
 		Fields struct {
-      CodeUrl string `json:"Code URL"`
+      		CodeUrl string `json:"Code URL"`
 			DemoUrl string `json:"Playable URL"`
 			HackatimeProjs string `json:"Hackatime Project Name"`
 			SlackID string `json:"Slack ID"`
 			HackatimeID int `json:"Hackatime ID"`
+			ProjectName string `json:"Project Name"`
 		}
 		ExternalID string `json:"id"`
 	} `json:"records"`
@@ -48,6 +49,7 @@ func LoadAirtable(config Config) ([]Project) {
 			SlackID: rec.Fields.SlackID,
 			HackatimeID: rec.Fields.HackatimeID,
 			ExternalID: rec.ExternalID,
+			Name: rec.Fields.ProjectName,
 		}
 		projects = append(projects, *newProject)
 	}

@@ -11,8 +11,14 @@ import (
 
 func CheckProjects(projects []Project, config Config) {
 	for index := range projects {
-    project := projects[index]
-  	fmt.Printf("\nproject #%d (of %d): %s (airtable id: %s)\n", index + 1, len(projects), project.HackatimeProjs[0], project.ExternalID)
+    	project := projects[index]
+		var name string
+		if project.Name != "" {
+			name = project.Name
+		} else {
+			name = project.HackatimeProjs[0]
+		}
+  		fmt.Printf("\nproject #%d (of %d): %s (airtable id: %s)\n", index + 1, len(projects), name, project.ExternalID)
 		fmt.Print("- creator info: ")
 		if project.SlackID != "" { fmt.Printf("(slack: %s)", project.SlackID) }
 		if project.HackatimeID != 0 { fmt.Printf("(hackatime: %d)", project.HackatimeID) }

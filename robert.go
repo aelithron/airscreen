@@ -20,7 +20,7 @@ type robertReq struct {
 	ExternalID string `json:"externalId"`
 }
 type submitter struct {
-  SlackID string `json:"slackId,omitempty"`
+    SlackID string `json:"slackId,omitempty"`
 	HackatimeID int `json:"hackatimeId,omitempty"`
 }
 type robertRes struct {
@@ -32,7 +32,13 @@ type robertRes struct {
 
 func SendProject(project Project, config Config) {
 	url, err := url.Parse("https://telescreen.hackclub.com/api/v1/ysws/projects")
-	reqBody := robertReq{ Name: project.HackatimeProjs[0], Kind: "hackatime", CodeUrl: project.CodeUrl, DemoUrl: project.DemoUrl, HackatimeProjs: project.HackatimeProjs, Submitter: submitter{ SlackID: project.SlackID, HackatimeID: project.HackatimeID }, ExternalID: project.ExternalID }
+	var name string
+	if project.Name != "" {
+		name = project.Name
+	} else {
+		name = project.HackatimeProjs[0]
+	}
+	reqBody := robertReq{ Name: name, Kind: "hackatime", CodeUrl: project.CodeUrl, DemoUrl: project.DemoUrl, HackatimeProjs: project.HackatimeProjs, Submitter: submitter{ SlackID: project.SlackID, HackatimeID: project.HackatimeID }, ExternalID: project.ExternalID }
 	jsonBody, _ := json.Marshal(reqBody)
 	req, err := http.NewRequest(http.MethodPost, url.String(), bytes.NewBuffer(jsonBody))
 	if err != nil { panic (err) }

@@ -12,6 +12,7 @@ import (
 )
 
 type Project struct {
+  Name string
 	CodeUrl string
 	DemoUrl string
 	HackatimeProjs []string
