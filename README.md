@@ -12,15 +12,15 @@ you need a robert api key for the program you run, as well as an airtable pat (w
 
 the airtable's fields must include the following, named exactly as specified:
 
-| field name | description | required |
-| --- | --- | --- |
-| Code URL | link to the git repo | yes |
-| Playable URL | link to the deployed demo | yes |
-| Hackatime Project Name | comma-seperated list of hackatime projects, or just a name if only one | yes |
-| Automation - First Submitted At | empty for projects that haven't been sent to unified, or a date/time for submitted ones | yes |
-| Review Status | "Approved" for projects that have passed "first-pass" review, anything else for non-approved | yes |
-| Project Name | the project's name | no (will use the first hackatime project's name if omitted) |
-| Slack ID | the submitter's slack id | no if hackatime id |
-| Hackatime ID | the submitter's numerical hackatime id | no if slack id |
+| field name | description | type | required |
+| --- | --- | --- | --- |
+| Code URL | link to the git repo | url | yes |
+| Playable URL | link to the deployed demo | url | yes |
+| Hackatime Project Name | comma-seperated list of hackatime projects, or just a name if only one | single line text | yes |
+| Automation - First Submitted At | empty for projects that haven't been sent to unified, or a date/time for submitted ones | date | yes |
+| Review Status | "Approved" for projects that have passed "first-pass" review, anything else for non-approved | single select | yes |
+| Project Name | the project's name | single line text | no (will use the first hackatime project's name if omitted) |
+| Slack ID | the submitter's slack id | single line text | no if hackatime id |
+| Hackatime ID | the submitter's numerical hackatime id | number | no if slack id |
 
 then, simply run the [airscreen binary](https://github.com/aelithron/airscreen/releases/latest) for your version, you may be able to just double-click it on some operating systems (some may require you run it from the terminal, just `./<name>` in the binary's directory to do so). 
