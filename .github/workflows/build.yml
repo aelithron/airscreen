@@ -9,6 +9,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
       - name: Get Version
@@ -23,11 +25,11 @@ jobs:
           VERSION: ${{ env.VERSION }}
         run: |
           mkdir dist
-          GOOS=linux GOARCH=amd64 go build -o dist/airscreen-v${{ env.VERSION }}-linux-amd64 .
-          GOOS=linux GOARCH=arm64 go build -o dist/airscreen-v${{ env.VERSION }}-linux-arm64 .
-          GOOS=darwin GOARCH=amd64 go build -o dist/airscreen-v${{ env.VERSION }}-macos-amd64 .
-          GOOS=darwin GOARCH=arm64 go build -o dist/airscreen-v${{ env.VERSION }}-macos-arm64 .
-          GOOS=windows GOARCH=amd64 go build -o dist/airscreen-v${{ env.VERSION }}-windows-amd64.exe .
+          GOOS=linux GOARCH=amd64 go build -o dist/airscreen-${{ env.VERSION }}-linux-amd64 .
+          GOOS=linux GOARCH=arm64 go build -o dist/airscreen-${{ env.VERSION }}-linux-arm64 .
+          GOOS=darwin GOARCH=amd64 go build -o dist/airscreen-${{ env.VERSION }}-macos-amd64 .
+          GOOS=darwin GOARCH=arm64 go build -o dist/airscreen-${{ env.VERSION }}-macos-arm64 .
+          GOOS=windows GOARCH=amd64 go build -o dist/airscreen-${{ env.VERSION }}-windows-amd64.exe .
       - name: Release
         uses: softprops/action-gh-release@v3
         env:
