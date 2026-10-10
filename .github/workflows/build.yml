@@ -30,6 +30,7 @@ jobs:
           GOOS=darwin GOARCH=amd64 go build -o dist/airscreen-${{ env.VERSION }}-macos-amd64 .
           GOOS=darwin GOARCH=arm64 go build -o dist/airscreen-${{ env.VERSION }}-macos-arm64 .
           GOOS=windows GOARCH=amd64 go build -o dist/airscreen-${{ env.VERSION }}-windows-amd64.exe .
+          chmod -R +x dist/
       - name: Release
         uses: softprops/action-gh-release@v3
         env:
