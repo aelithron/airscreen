@@ -1,0 +1,40 @@
+name: Build/Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Get Version
+        run: echo "VERSION=${GITHUB_REF_NAME#cli/v}" >> $GITHUB_ENV
+      - uses: actions/setup-go@v6
+      - run: go mod download
+      - run: go vet .
+      - name: Build
+        env:
+          VERSION: ${{ env.VERSION }}
+        run: |
+          mkdir dist
+          GOOS=linux GOARCH=amd64 go build -o dist/airscreen-v${{ env.VERSION }}-linux-amd64 .
+          GOOS=linux GOARCH=arm64 go build -o dist/airscreen-v${{ env.VERSION }}-linux-arm64 .
+          GOOS=darwin GOARCH=amd64 go build -o dist/airscreen-v${{ env.VERSION }}-macos-amd64 .
+          GOOS=darwin GOARCH=arm64 go build -o dist/airscreen-v${{ env.VERSION }}-macos-arm64 .
+          GOOS=windows GOARCH=amd64 go build -o dist/airscreen-v${{ env.VERSION }}-windows-amd64.exe .
+      - name: Release
+        uses: softprops/action-gh-release@v3
+        env:
+          VERSION: ${{ env.VERSION }}
+        with:
+          name: "airscreen v${{ env.VERSION }}"
+          files: "dist/**"
+          make_latest: true
+          body: |
+            this is the full airscreen binary, for sending hack club ysws submissions to the fraud review queue!
+            **you need a robert api key, airtable api key, airtable base id, and airtable table id.**
+            read more about it: (https://github.com/aelithron/airscreen)[github.com/aelithron/airscreen]

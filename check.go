@@ -11,14 +11,14 @@ import (
 
 func CheckProjects(projects []Project, config Config) {
 	for index := range projects {
-    	project := projects[index]
+    project := projects[index]
 		var name string
 		if project.Name != "" {
 			name = project.Name
 		} else {
 			name = project.HackatimeProjs[0]
 		}
-  		fmt.Printf("\nproject #%d (of %d): %s (airtable id: %s)\n", index + 1, len(projects), name, project.ExternalID)
+  	fmt.Printf("\nproject #%d (of %d): %s (airtable id: %s)\n", index + 1, len(projects), name, project.ExternalID)
 		fmt.Print("- creator info: ")
 		if project.SlackID != "" { fmt.Printf("(slack: %s)", project.SlackID) }
 		if project.HackatimeID != 0 { fmt.Printf("(hackatime: %d)", project.HackatimeID) }
@@ -39,6 +39,8 @@ func CheckProjects(projects []Project, config Config) {
 		if strings.ToLower(string(letter)) == "y" {
 			fmt.Println("sending...")
 			SendProject(project, config)
-		} else { fmt.Println("skipping!") }
+		} else {
+			fmt.Println("skipping!")
+		}
 	}
 }

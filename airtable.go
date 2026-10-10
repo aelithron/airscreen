@@ -12,7 +12,7 @@ import (
 type airtableResp struct {
   Records []struct {
 		Fields struct {
-      		CodeUrl string `json:"Code URL"`
+      CodeUrl string `json:"Code URL"`
 			DemoUrl string `json:"Playable URL"`
 			HackatimeProjs string `json:"Hackatime Project Name"`
 			SlackID string `json:"Slack ID"`
