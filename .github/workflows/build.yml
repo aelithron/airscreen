@@ -36,7 +36,7 @@ jobs:
         env:
           VERSION: ${{ env.VERSION }}
         with:
-          name: "airscreen v${{ env.VERSION }}"
+          name: "airscreen ${{ env.VERSION }}"
           files: "dist/**"
           make_latest: true
           body: |
