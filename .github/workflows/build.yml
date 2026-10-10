@@ -41,4 +41,4 @@ jobs:
           body: |
             this is the full airscreen binary, for sending hack club ysws submissions to the fraud review queue!
             **you need a robert api key, airtable api key, airtable base id, and airtable table id.**
-            read more about it: (https://github.com/aelithron/airscreen)[github.com/aelithron/airscreen]
+            read more about it: https://github.com/aelithron/airscreen
