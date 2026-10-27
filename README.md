@@ -6,7 +6,8 @@
 
 a little utility that sends hack club ysws submissions (from an airtable base) to robert (in telescreen) for fraud checking! \
 written in golang and fully compliant with the robert api. **exclusively for software!** \
-note: this will also only send projects that have been approved in "first-pass" review, but not submitted to unified. more modes may be coming eventually, idk!
+note: this will also only send projects that have been approved in "first-pass" review, but not submitted to unified. more modes may be coming eventually, idk! \
+it was also built with minimal dependencies to mitigate the risk of supply chain attacks :3
 ## using
 you need a robert api key for the program you run, as well as an [airtable pat](https://airtable.com/create/tokens/new) (with the `data:records.read` scope), base id, and table id. the cli will ask you for these on first run, you can just paste them in! alternatively, you can fill them into `~/.airscreen/config.json` in the [config format](https://github.com/aelithron/airscreen/blob/main/example.config.json).
 
